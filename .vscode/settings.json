@@ -1,0 +1,7 @@
+{
+  "mochaExplorer.require": ["ts-node/register"],
+  "mochaExplorer.env": { "NODE_ENV": "test" },
+  "mochaExplorer.timeout": 99999,
+  "mochaExplorer.files": "tests/**/*.test.ts",
+  "mochaExplorer.exit": true
+}

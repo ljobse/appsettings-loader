@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["src/definitions", "node_modules/@types"],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "./lib",
+    "allowJs": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./.cache/buildInfo.json",
+    "declaration": true,
+    "baseUrl": "src"
+  },
+  "include": ["src/**/*", "tests/**/*.ts"],
+  "exclude": ["node_modules", "lib"]
+}

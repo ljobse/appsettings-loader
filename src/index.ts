@@ -1,0 +1,1 @@
+export { applyEnvConfig } from "./applyEnvConfig";
