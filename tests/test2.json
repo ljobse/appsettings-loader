@@ -2,5 +2,6 @@
   "test": 10,
   "nestedRoot": {
     "nestedChild": { "valBool": true, "valNumber": 20, "valText": "text" }
-  }
+  },
+  "unchanged": "left"
 }

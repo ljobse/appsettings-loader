@@ -19,22 +19,16 @@ describe("Loader test", () => {
   });
 
   it("Should replace file by cli", async () => {
-    const filePath = `${__dirname}/test.json`;
+    const filePath = `${__dirname}/test2.json`;
     process.env["nestedRoot.nestedChild.valnumber"] = "999";
+    const oldSettings = fs.readFileSync(filePath).toString();
     replaceWithEnvConfig({ file: filePath });
     const newSettings = JSON.parse(fs.readFileSync(filePath).toString());
+    await new Promise((res) => setTimeout(res, 20));
 
     expect(999).equal(newSettings.nestedRoot.nestedChild.valNumber);
-    expect("text").equal(newSettings.nestedRoot.nestedChild.valText);
+    expect("left").equal(newSettings.unchanged);
 
-    process.env["nestedRoot.nestedChild.valnumber"] =
-      settings.nestedRoot.nestedChild.valNumber.toString();
-    replaceWithEnvConfig({ file: filePath });
-
-    const newSettings2 = JSON.parse(fs.readFileSync(filePath).toString());
-    expect(settings.nestedRoot.nestedChild.valNumber).equal(
-      newSettings2.nestedRoot.nestedChild.valNumber
-    );
-    expect("text").equal(newSettings2.nestedRoot.nestedChild.valText);
+    fs.writeFileSync(filePath, oldSettings);
   });
 });
