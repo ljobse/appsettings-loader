@@ -36,6 +36,7 @@ var newSettings = applyEnvConfig(require("./config/appsettings.json"));
 - Nesting is supported by dot separation.
 - Types are inherited
 - Case insensitive
+- Omits underscores `_`
 
 ### Real world example
 
@@ -44,11 +45,11 @@ Environment on cloud provider or locally is set with the variables you need to l
 ```dosini
 #process.env
 
-DATABASENAME=server_db
+DATABASE_NAME=server_db
 ```
 
 ```json
-//# src/config/appsettings.json
+//# src/config/config.json
 {
   "databaseName": "postgres"
 }
@@ -58,7 +59,7 @@ DATABASENAME=server_db
 //# src/config/index.ts
 
 import { applyEnvConfig } from "@ljobse/appsettings-loader";
-import appsettings from "./appsettings.json";
+import appsettings from "./config.json";
 
 const config = applyEnvConfig(appsettings);
 

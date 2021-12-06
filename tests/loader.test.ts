@@ -18,6 +18,18 @@ describe("Loader test", () => {
     expect("new text").equal(newSettings.nestedRoot.nestedChild.valText);
   });
 
+  it("Should omit multiple underscores value", async () => {
+    process.env["APP_CLIENT_ID"] = "bbbbb";
+    const newSettings = applyEnvConfig(settings);
+    expect("bbbbb").equal(newSettings.appClientId);
+  });
+
+  it("Should omit spaces", async () => {
+    process.env["SOME_CRAPPY_CONFIG "] = "99";
+    const newSettings = applyEnvConfig(settings);
+    expect(99).equal(newSettings.someCrappyConfig);
+  });
+
   it("Should replace file by cli", async () => {
     const filePath = `${__dirname}/test2.json`;
     process.env["nestedRoot.nestedChild.valnumber"] = "999";
