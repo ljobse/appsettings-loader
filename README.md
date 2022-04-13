@@ -33,7 +33,7 @@ The library allows you to load the current process.env variables into an importe
 var newSettings = applyEnvConfig(require("./config/appsettings.json"));
 ```
 
-- Nesting is supported by dot separation.
+- Nesting is supported by dot separation `.` and double underscores `__`.
 - Types are inherited
 - Case insensitive
 - Omits underscores `_`
