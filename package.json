@@ -1,6 +1,6 @@
 {
   "name": "@ljobse/appsettings-loader",
-  "version": "0.1.2",
+  "version": "0.1.7",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "description": "This allows you to automatically map environment variables typed into your application.",
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@types/node": "^15.12.4",
+    "yaml": "^2.2.1",
     "yargs": "^17.0.1"
   },
   "devDependencies": {
