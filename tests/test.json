@@ -4,5 +4,6 @@
     "nestedChild": { "valBool": true, "valNumber": 20, "valText": "text" }
   },
   "appClientId": "aaaa",
-  "someCrappyConfig": 1
+  "someCrappyConfig": 1,
+  "app": { "arr": [{ "foo": "bar" }] }
 }

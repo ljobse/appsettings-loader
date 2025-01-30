@@ -74,3 +74,32 @@ import { config } from "./config";
 console.log(config.databaseName);
 // => "server_db"
 ```
+
+### Array support
+
+JSON arrays are supported in the values as well.
+
+In your config you can define the structure of the array.
+
+```json
+{
+  "app": { "arr": [{ "foo": "bar" }] }
+}
+```
+
+The env variable should look like this to override:
+
+```
+APP__ARR=[{"foo":"baz"}]
+```
+
+and then the result will be:
+
+```typescript
+//# src/app.ts
+
+import { config } from "./config";
+
+console.log(config.app.arr);
+// => [{ foo: "baz" }]
+```
