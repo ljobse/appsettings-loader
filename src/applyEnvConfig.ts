@@ -1,7 +1,9 @@
 const flattenObject = (obj: any, prefix = "") =>
   Object.keys(obj).reduce((acc: any, k) => {
     const pre = prefix.length ? prefix + "." : "";
-    if (typeof obj[k] === "object")
+    if (Array.isArray(obj[k])) {
+      acc[pre + k] = obj[k] as any;
+    } else if (typeof obj[k] === "object")
       Object.assign(acc, flattenObject(obj[k], pre + k));
     else acc[pre + k] = obj[k] as any;
     return acc;
@@ -53,19 +55,23 @@ export const applyEnvConfig = <TConfig = { [key: string]: any }>(
   }, {} as any);
 
   Object.keys(flattenedSettings).forEach((key) => {
-    const oldValue = flattenedSettings[key];
-    const oldCtor = (oldValue as any).constructor;
     const envKey = key
       .toLowerCase()
       .replace(new RegExp(`__`, "g"), ".")
       .replace(new RegExp(`_`, "g"), "")
       .trim();
+    if (!(envKey in env)) return;
 
-    const newValue = envKey in env ? env[envKey] : oldValue;
+    const oldValue = flattenedSettings[key];
+    const oldCtor = (oldValue as any).constructor;
+    const newValue = env[envKey];
+
     flattenedSettings[key] =
       typeof oldValue === "boolean"
         ? oldCtor(newValue) &&
           newValue.toString().toLowerCase() === true.toString()
+        : typeof oldValue === "object"
+        ? JSON.parse(newValue)
         : oldCtor(newValue);
   });
 
