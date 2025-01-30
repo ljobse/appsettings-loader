@@ -1,9 +1,9 @@
-import { expect } from 'chai';
-import * as fs from 'fs';
+import { expect } from "chai";
+import * as fs from "fs";
 
-import { applyEnvConfig } from '../src/applyEnvConfig';
-import { replaceWithEnvConfig } from '../src/replaceWithEnvConfig';
-import settings from './test.json';
+import { applyEnvConfig } from "../src/applyEnvConfig";
+import { replaceWithEnvConfig } from "../src/replaceWithEnvConfig";
+import settings from "./test.json";
 
 describe("Loader test", () => {
   it("Should replace value", async () => {
@@ -42,5 +42,10 @@ describe("Loader test", () => {
     expect("left").equal(newSettings.unchanged);
 
     fs.writeFileSync(filePath, oldSettings);
+  });
+  it("Should be able to read json values with underscores", async () => {
+    process.env["APP__ARR"] = `[{"foo":"baz"}]`;
+    const newSettings = applyEnvConfig(settings);
+    expect([{ foo: "baz" }]).deep.equal(newSettings.app.arr);
   });
 });
